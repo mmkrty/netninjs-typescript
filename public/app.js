@@ -15,15 +15,20 @@ const list = new ListTemplate(ul);
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     let doc;
+    let values = [
+        tofrom.value,
+        details.value,
+        amount.valueAsNumber,
+    ];
     if (type.value === "Invoice") {
-        doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Invoice(...values);
     }
     else {
-        doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Payment(...values);
     }
     list.render(doc, type.value, "end");
 });
-//interface and ENUMS
+// interface and ENUMS Generics
 var ResourceType;
 (function (ResourceType) {
     ResourceType[ResourceType["BOOK"] = 0] = "BOOK";
@@ -43,3 +48,7 @@ const docTwo = {
     data: { title: "name of the wind" },
 };
 console.log(docOne, docTwo);
+// tuples
+let tup = ["hello", 24, true];
+let student;
+student = ["bruce", 18];

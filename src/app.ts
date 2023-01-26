@@ -23,16 +23,22 @@ form.addEventListener("submit", (e: Event) => {
 
   let doc: HasFormatter;
 
+  let values: [string, string, number] = [
+    tofrom.value,
+    details.value,
+    amount.valueAsNumber,
+  ];
+
   if (type.value === "Invoice") {
-    doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+    doc = new Invoice(...values);
   } else {
-    doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+    doc = new Payment(...values);
   }
 
   list.render(doc, type.value, "end");
 });
 
-//interface and ENUMS
+// interface and ENUMS Generics
 enum ResourceType {
   BOOK,
   AUTHOR,
@@ -60,3 +66,8 @@ const docTwo: Resource<object> = {
 };
 
 console.log(docOne, docTwo);
+
+// tuples
+let tup: [string, number, boolean] = ["hello", 24, true];
+let student: [string, number];
+student = ["bruce", 18];
